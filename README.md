@@ -116,7 +116,7 @@ Json format using rules, the rule is placed in a model `\RuleMatcher\rule` in，
 ```
 ## Question and answer test data set
 
-Please click [here to](https://drive.google.com/file/d/0BxfXm7KkNKc-RkY2Z1pONUlqODg/view?usp=sharing) download some of the test datasets, including PTT C_Chat and Gossiping non-news quiz about 250,000. After unzipping the file, please place in the folder `QuestionAnswering/data/`, `reply.rar` data unzipped folder please placed `QuestionAnswering/data/processed` under：
+Please click [here to](https://drive.google.com/file/d/0BxfXm7KkNKc-RkY2Z1pONUlqODg/view?usp=sharing) (# need to link to english dataset) download some of the test datasets, including PTT C_Chat and Gossiping non-news quiz about 250,000. After unzipping the file, place contents under the folder under `QuestionAnswering/data/`. Place the unzipped folder `reply.rar` under `QuestionAnswering/data/processed`. The resulting folder structure should look like this:
 ```
 QuestionAnswering
 └── data
@@ -130,7 +130,7 @@ QuestionAnswering
    │       └── xxx.json
    └── Titles.txt
 ```
-Once configured, you can `chatbot.py` in the `self.github_qa_unupdated` set to `False`open the Q & A module for testing.
+Once configured, you can change the `self.github_qa_unupdated` configuration in `chatbot.py` to `True`. This will open the Q & A module for testing.
 
 ## Development log
 * [Word-based topic matching](http://zake7749.github.io/2016/08/30/chatterbot-with-word2vec/)
