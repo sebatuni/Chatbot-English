@@ -116,7 +116,7 @@ Json format using rules, the rule is placed in a model `\RuleMatcher\rule` in，
 ```
 ## Question and answer test data set
 
-Please click [here to](https://drive.google.com/file/d/0BxfXm7KkNKc-RkY2Z1pONUlqODg/view?usp=sharing) (# need to link to english dataset) download some of the test datasets, including PTT C_Chat and Gossiping non-news quiz about 250,000. After unzipping the file, place contents under the folder under `QuestionAnswering/data/`. Place the unzipped folder `reply.rar` under `QuestionAnswering/data/processed`. The resulting folder structure should look like this:
+Please click [here to](https://drive.google.com/file/d/0BxfXm7KkNKc-RkY2Z1pONUlqODg/view?usp=sharing) (**# need to link to english dataset**) download some of the test datasets, including PTT C_Chat and Gossiping non-news quiz about 250,000. After unzipping the file, place the contents under `QuestionAnswering/data/`. Then move the unzipped folder `reply.rar` under `QuestionAnswering/data/processed`. The resulting folder structure should look like this:
 ```
 QuestionAnswering
 └── data
