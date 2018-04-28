@@ -1,5 +1,4 @@
 # Mianbot
----
 
 ![demo](https://raw.githubusercontent.com/zake7749/Chatbot/master/docs/demo.png)
 
@@ -9,7 +8,6 @@ Mianbot is a chat robot built using a model and search model. There are currentl
 * The second (right) except the weather response, mainly based on PTT Gossiping as the knowledge base, through the comparison of text similarity to retrieve the article title most similar to the user input, and then pick the most reliable reply from the set of tweets. Program content and experimental process, please refer to [PTT-Chat_Generator](https://github.com/zake7749/PTT-Chat-Generator).
 
 ## Matching Example
----
 
 More examples can refer to `example/output.txt`
 
@@ -38,7 +36,6 @@ Similarity|concept|Matching element|
 0.0000|buy| |
 
 ## Environmental requirements
----
 
 * Install python3 development environment
 * Install [gensim – Topic Modelling in Python](https://github.com/RaRe-Technologies/gensim)
@@ -51,7 +48,6 @@ c = console.Console(model_path='your_model')
 * To use the QA module, first in accordance [with the test data set Q](https://github.com/zake7749/Chatbot#%E5%95%8F%E7%AD%94%E6%B8%AC%E8%A9%A6%E7%94%A8%E8%B3%87%E6%96%99%E9%9B%86) configuration, or through the`chatbot.py` the `self.github_qa_unupdated` set `True` off QA module selection.
 
 ## How to use
----
 
 ### Chat robot
 
