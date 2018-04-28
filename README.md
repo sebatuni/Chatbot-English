@@ -126,7 +126,7 @@ QuestionAnswering
    │       └── xxx.json
    └── Titles.txt
 ```
-Once configured, you can change the `self.github_qa_unupdated` configuration in `chatbot.py` to `True`. This will open the Q & A module for testing.
+Once configured, you can change the `self.github_qa_unupdated` configuration in `chatbot.py` to `False`. This will open the Q & A module for testing.
 
 ## Development log
 * [Word-based topic matching](http://zake7749.github.io/2016/08/30/chatterbot-with-word2vec/)
