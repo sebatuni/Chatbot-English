@@ -13,7 +13,7 @@ class Chatbot(object):
 
         """
         # Args:
-         - build_console: 是否要建構依照詞向量進行主題匹配的 console,
+         - build_console: whether to construct topic matching based on word vectors console,
          如果只需要 qa 模組，可將 build_console 關閉，可見 demo_qa.py
         """
 
@@ -43,48 +43,46 @@ class Chatbot(object):
         # For Question Answering
         self.github_qa_unupdated = False
         if not self.github_qa_unupdated:
-
             try:
                 self.answerer = qa.Answerer()
             except Exception as exc:
-                print("[QA] 請確認問答資料集的目錄結構是否正確")
-                print("[QA] 如尚未取得問答資料集, 請至 Github: zake7749/Chatbot/Readme.md 中下載, 或將 self.github_qa_unupdated 設為 true")
+                print("[QA] Please confirm the directory structure of the questions and answer data set is correct.")
+                print("[QA] If you are still getting errors,s change self.github_qa_unupdated to True")
 
         self.default_response = [
-            "是嗎?",
-            "我不太明白你的意思",
-            "原來如此"
+            "Say it again?",
+            "I did not catch that.",
+            "I do not know what you mean.",
+            "Huh?"
         ]
 
     def waiting_loop(self):
-
-        print("你好，我是 " + self.name)
+        """ Wait for user response"""
+        print("Hello, my name is " + self.name)
         while True:
-
             speech = input()
             res = self.listen(speech)
             print(res[0])
 
     def listen(self, sentence, target=None, api_key=None, qa_threshold=35, qa_block_threshold=60):
-
         """
-        listen function is to encapsulate the following getResponse methods:
+        The listen function is to encapsulate the following getResponse methods:
 
-            1.getResponseOnRootDomains(sentence,target)
-            2.getResponseForGeneralQA(sentence)
+            1. getResponseOnRootDomains(sentence, target)
+            2. getResponseForQA(sentence)
 
-        1 is to measure the consine similarity between keywords and sentence.
+        1 is to measure the cosine similarity between keywords and sentence.
         2 is to measure the levenshtein distance between sentence and the questions
-        in database/corpus.
+        in the database/corpus.
 
         Args:
             - target : Optional. It is to define the user's input is in form of
-            a sentence or a given answer by pressing the bubble buttom.
+            a sentence or a given answer by pressing the bubble button.
             If it is come from a button's text, target is the attribute name our
             module want to confirm.
             - api_key : for recognizing the user and get his custom rule/QAs.
 
-        Return: [response,status,target,candiates]
+        Return: [response, status, target, candiates]
             - response : Based on the result of modules or a default answer.
             - status   : It would be the module's current status if the user has
                          been sent into any module and had not left it.
@@ -98,9 +96,10 @@ class Chatbot(object):
 
         # First of all,
         # Assume this sentence is for qa, but use a very high threshold.
-        qa_response, qa_sim = self.getResponseForQA(sentence,qa_threshold)
+        qa_response, qa_sim = self.getResponseForQA(sentence, qa_threshold)
         if qa_sim > qa_block_threshold:
-            return qa_response,None,None,None,None
+            # NOTE: 5 returns?
+            return qa_response, None, None, None, None
 
         # do the rule matching.
         is_confident = self.rule_match(sentence, threshold=0.4)
@@ -114,11 +113,11 @@ class Chatbot(object):
         # is qa again, but this time use a smaller threshold.
         else:
             if qa_sim > qa_threshold:
-                return qa_response,None,None,None
+                return qa_response, None, None, None
             else:
                 # This query has too low similarity for all matching methods.
                 # We can only send back a default response.
-                return self.getDefaultResponse(),None,None,None
+                return self.getDefaultResponse(), None, None, None
 
     def getResponseOnRootDomains(self, target=None):
 
@@ -169,7 +168,7 @@ class Chatbot(object):
 
     def getResponseForQA(self, sentence, threshold=0):
         """
-        Encapsulate getResponseForGeneralQA
+        Encapsulate getResponseForQA
         For details on the matching method, please refer PTT-Chat-Generator repo on github.
 
         Return:
@@ -177,21 +176,21 @@ class Chatbot(object):
             if the similarity < threshold will return None,0.
         """
 
-        #FIXME Remove this flag when all have done.
+        # FIXME Remove this flag when all have done.
         if self.github_qa_unupdated:
             return None, 0
 
-        response,sim = self.answerer.getResponse(sentence)
+        response, sim = self.answerer.getResponse(sentence)
 
         if sim > threshold:
             return response,sim
 
-        return None,0
+        return None, 0
 
     def rule_match(self, speech, threshold):
 
         """
-        Set domain,path,similarity,root_domain based on the rule which has
+        Set domain, path, similarity, root_domain based on the rule which has
         the best similarity with user's input.
 
         Return: a boolean value, to indicate that this match makes sense or not.
@@ -228,7 +227,7 @@ class Chatbot(object):
 
         # TODO @zake7749: update the attn-seq2seq code to github.
 
-        return self.default_response[random.randrange(0,len(self.default_response))]
+        return self.default_response[random.randrange(0, len(self.default_response))]
 
     def testQuestionAnswering(self, sentence):
 
